@@ -21,6 +21,7 @@ class check
 		check ob = new check();
 		while(k)
 		{
+			System.out.print("Command >");
 			ob.readCommands(ob.terminal());
 		}
 	}
@@ -46,6 +47,7 @@ class check
 	{
         File folders = new File(cd);
         f = folders.list();
+        adjustArray();
 	}
 	void cmdCd(String s)
 	{
@@ -104,6 +106,9 @@ class check
 			case "exit":
 			exit();
 			break;
+			case "bye":
+			exit();
+			break;
 			case "list":
 			listFiles();
 			break;
@@ -114,6 +119,7 @@ class check
 				runProg(arr[1]);
 			break;	
 			case "trml":
+			getFiles();
 			runProcess(arr);
 			break;
 			default :
@@ -182,6 +188,8 @@ class check
             	exe(3,i);
         }
     }
+
+    //running commands in terminal
     void exeJava(String fn)
     {
         try
@@ -225,15 +233,16 @@ class check
         System.out.println("***************");
         System.out.println();
     }
+
+
     String getFileType(String name)
     {
-    	//may throw error due to name.length being greater
     	String rt=name.substring(name.lastIndexOf(".") + 1 , name.length());
     	return rt;
     }
 	void changeDir(String str)
 	{
-
+		//Code to change directory of the program
 	}
 	void exit()
 	{
