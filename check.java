@@ -194,7 +194,9 @@ class check
     {
         try
         {
-            runProcess("java "+fn);
+            runProcess("javac "+fn);
+            runProcess("java "+fn.substring(0,fn.length()-5));
+            runProcess("rm -rf "+fn.substring(0,fn.length()-5)+".class");
         }
         catch (Exception e)
         {
@@ -210,6 +212,7 @@ class check
         {
             runProcess("c++ "+fn);
             runProcess("./a.out");
+            runProcess("rm -rf a.out");
         }
         catch (Exception e)
         {
