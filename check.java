@@ -6,6 +6,7 @@ class check
 	static boolean k;
 	String f[] = null;
 	String cd;
+	List<Integer> list=new ArrayList<Integer>();
 	check()
 	{
 		k=true;
@@ -194,9 +195,7 @@ class check
     {
         try
         {
-            runProcess("javac "+fn);
-            runProcess("java "+fn.substring(0,fn.length()-5));
-            runProcess("rm -rf "+fn.substring(0,fn.length()-5)+".class");
+            runProcess("java "+fn);
         }
         catch (Exception e)
         {
@@ -295,4 +294,40 @@ class check
 	    	System.out.println(e);
 	    }
     }
+    void addIgnoreList(String filename) 
+    {  
+    	String str="";
+        int ch; 
+        FileReader fr=null; 
+        try
+        { 
+            fr = new FileReader("ignorelist.txt"); 
+	        while ((ch=fr.read())!=-1) 
+	            str=str+(char)ch; 
+	        fr.close(); 
+        } 
+        catch (FileNotFoundException fe) 
+        { 
+            System.out.println("creating new ignore list");
+            str="ignorelist.txt"; 
+        }
+        catch(IOException e)
+        {
+        	System.out.println(e);
+        }
+        str=str+";"+filename;
+  		try
+  		{
+	        FileWriter fw=new FileWriter("ignorelist.txt"); 
+	        for (int i = 0; i < str.length(); i++) 
+	            fw.write(str.charAt(i)); 
+	  
+	        System.out.println(filename+" added to ignore list successfully");  
+	        fw.close();
+        }
+        catch(Exception e)
+        {
+        	System.out.println("Failed : "+e);
+        } 
+    } 
 }
